@@ -41,6 +41,9 @@ io.on('connection', function(socket) {
 socket.on('control', function(player){
     io.emit('control', player);
   });
+  socket.on('update', function(player){
+    io.emit('update', player);
+  });
   socket.on('player', function(spawn){
     io.emit('player', spawn);
   });
