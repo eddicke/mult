@@ -124,7 +124,7 @@ b.setEnabled(false)
     socket.on("hunts", function(me){
     usrs++
       console.log("there's a new user online");
-      
+      socket.emit("update", usrs)
     socket.emit("control", {id: id, pos: balls[id].getAbsolutePosition()})
       
       socket.emit("newplayer", {id: id, pos: amt})
@@ -141,7 +141,7 @@ b.setEnabled(false)
       
       
       if(usrs == 2){
-         
+         socket.emit("update", usrs)
        // console.log("there was an old user online")
         socket.emit("control", {id: id, pos: balls[id].getAbsolutePosition()})
         
@@ -172,7 +172,9 @@ b.setEnabled(false)
 })
           }
           
-          
+          socket.on('update', function(player){
+            alert("This player with ID: "+player+" just joined");
+          })
             socket.on('newplayer', function(posx){
     balls[posx.id].position.y += posx.pos;
   });
