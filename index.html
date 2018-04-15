@@ -182,6 +182,12 @@ b.setEnabled(false)
       
       socket.emit("newplayer", {id: id, pos: pos})
           scene.onPointerDown = function(ev, pickInfo){
+            
+            camera.lockedTarget = ball
+setTimeout(function(){
+    camera.lockedTarget = null
+}, 200)
+            
     if(pickInfo.hit){
      // pos.copyFrom(pickInfo.pickedPoint)
       socket.emit("newplayer", {id: id, pos: pickInfo.pickedPoint})
@@ -257,6 +263,13 @@ b.setEnabled(false)
      var camElevation = 14.0;
     var camAltitude = 0.0;
     scene.registerBeforeRender(function() {
+      if(id == id){
+        
+         camera.position.y = balls[id].position.y+10
+            camera.position.x = balls[id].position.x
+            camera.position.z = balls[id].position.z-80
+        
+      }
         if (terrainCreated) {
           
            camAltitude = terrain.getHeightFromMap(camera.position.x, camera.position.z) + camElevation;
