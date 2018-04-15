@@ -135,7 +135,7 @@ sphere.material = mat
 for(var i = 0; i<MAXROOM; i++){
     var ball = sphere.createInstance("ball")
     ball.position.z = 100*(i/4)
-
+    ball.scaling.y = 5
     balls.push(ball)
 }
 //sphere.dispose()
