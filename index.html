@@ -190,7 +190,9 @@ b.setEnabled(false)
           })
             socket.on('newplayer', function(posx){
    // balls[posx.id].position.copyFrom(posx.pos);
+              scene.registerBeforeRender(function(){
               balls[posx.id].position = BABYLON.Vector3.Lerp(balls[posx.id].position, posx.pos, .05);
+              })
   });
           
           socket.on("player", function(spawn){
