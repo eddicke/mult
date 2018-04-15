@@ -248,14 +248,14 @@ b.setEnabled(false)
               ///////////////////////////************************************************
           
           //terrain heightmap collision
-          var ballElevation = 1.0
+          var ballElevation = .5
     var ballAltitude = 0.0
     scene.registerBeforeRender(function() {
         if (terrainCreated) {
-       if(id == id){
+       balls.forEach(function(m){
             ballAltitude = terrain.getHeightFromMap(ball.position.x, ball.position.z) + ballElevation;
-           balls[id].position.y =  ballAltitude;
-       }
+            m.position.y =  ballAltitude;
+       })
         }
     });
           
