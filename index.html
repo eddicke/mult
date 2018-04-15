@@ -231,7 +231,7 @@ b.setEnabled(false)
           })
             socket.on('newplayer', function(posx){
             balls[posx.id].position.copyFrom(posx.pos);
-     if(id != posx.id){
+     if(id == posx.id){
        balls[id].setParent(camera)
        balls[id].position.z = 5
      }
