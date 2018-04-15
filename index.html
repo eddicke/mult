@@ -189,10 +189,9 @@ b.setEnabled(false)
             alert("This player with ID: "+player+" just joined");
           })
             socket.on('newplayer', function(posx){
-   // balls[posx.id].position.copyFrom(posx.pos);
-              setInterval(function(){
-              balls[posx.id].position = BABYLON.Vector3.Lerp(balls[posx.id].position, posx.pos, .05);
-              },200)
+   balls[posx.id].position.copyFrom(posx.pos);
+       
+             
   });
           
           socket.on("player", function(spawn){
