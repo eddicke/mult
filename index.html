@@ -163,6 +163,8 @@ b.setEnabled(false)
      var usrs = 0;
      var pos = new BABYLON.Vector3.Zero()    
         
+           balls[id].setParent(camera)
+            balls[id].position.z = 10
           
   socket.on('connect', function() {
     var emp;
@@ -190,7 +192,7 @@ b.setEnabled(false)
     }
            }
           document.addEventListener("keydown", function(){
-            socket.emit("newplayer", {id: id, pos: camera.position})
+            socket.emit("newplayer", {id: id, pos: balls[id].getAbsolutePosition()})
           })
           
        //broadcast new user spawned
@@ -234,8 +236,8 @@ b.setEnabled(false)
             socket.on('newplayer', function(posx){
             balls[posx.id].position.copyFrom(posx.pos);
      if(id != player.id){
-       balls[id].setParent(camera)
-       balls[id].position.z = 20
+     //  balls[id].setParent(camera)
+      // balls[id].position.z = 20
      }
              
   });
