@@ -234,7 +234,7 @@ b.setEnabled(false)
           socket.on("player", function(spawn){
      
        socket.on('control', function(player){
- // balls[player].position.set(spawn.pos);
+  balls[player].position.set(spawn.pos);
   
 })
    
@@ -242,8 +242,8 @@ b.setEnabled(false)
           
               ///////////////////////////************************************************
           if(id == id){
-            balls[id].setParent(camera)
-            balls[id].position.z = 4
+           // balls[id].setParent(camera)
+           // balls[id].position.z = 4
            document.addEventListener("keydown", function(ev){
     if(ev.which == 32){
         amt +=.05
@@ -252,7 +252,7 @@ b.setEnabled(false)
           }
           
           //terrain heightmap collision
-          var ballElevation = 30
+          var ballElevation = 20
     var ballAltitude = 0.0
      var camElevation = 14.0;
     var camAltitude = 0.0;
