@@ -178,16 +178,14 @@ b.setEnabled(false)
       
       console.log("there's a new user online");
       socket.emit("update", usrs)
+      
+      balls[id].parent = camera
+      balls[id].position.z = 5
     socket.emit("control", {id: id, pos: balls[id].getAbsolutePosition()})
       
       socket.emit("newplayer", {id: id, pos: pos})
           scene.onPointerDown = function(ev, pickInfo){
-            if(id == id){
-            camera.lockedTarget = balls[id]
-setTimeout(function(){
-    camera.lockedTarget = null
-}, 200)
-            }
+           
     if(pickInfo.hit){
      // pos.copyFrom(pickInfo.pickedPoint)
       socket.emit("newplayer", {id: id, pos: pickInfo.pickedPoint})
@@ -232,7 +230,7 @@ setTimeout(function(){
             alert("This player with ID: "+player+" just joined");
           })
             socket.on('newplayer', function(posx){
-             balls[posx.id].position.copyFrom(posx.pos);
+            // balls[posx.id].position.copyFrom(posx.pos);
      
              
   });
@@ -269,10 +267,10 @@ setTimeout(function(){
            camAltitude = terrain.getHeightFromMap(camera.position.x, camera.position.z) + camElevation;
            camera.position.y = camAltitude;
           
-       balls.forEach(function(m){
+       /*balls.forEach(function(m){
             ballAltitude = terrain.getHeightFromMap(ball.position.x, ball.position.z) + ballElevation;
            m.position.y =  ballAltitude;
-       })
+       })*/
         }
     });
           
