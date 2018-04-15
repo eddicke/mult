@@ -72,7 +72,7 @@ document.getElementById('chatContent').innerHTML = "welcome to the chat forum"
     
         
             // Our built-in 'ground' shape. Params: name, width, depth, subdivs, scene
-            var ground = BABYLON.Mesh.CreateGround("ground1", 6, 6, 2, scene);
+            var ground = BABYLON.Mesh.CreateGround("ground1", 26, 26, 2, scene);
         
            var Player = function(){
        this.player = BABYLON.Mesh.CreateSphere("sphere1", 16, 2, scene);
@@ -139,11 +139,11 @@ b.setEnabled(false)
     socket.emit("control", {id: id, pos: balls[id].getAbsolutePosition()})
       
       socket.emit("newplayer", {id: id, pos: amt})
-           document.addEventListener("keydown", function(ev){
-    if(ev.which == 32){
-      socket.emit("newplayer", {id: id, pos: amt})
+          scene.onPointerDown = function(ev, pickInfo){
+    if(pickInfo.hit){
+      socket.emit("newplayer", {id: id, pos: pickInfo.pickedPoint})
     }
-           })
+           }
        //broadcast new user spawned
       balls[id].setEnabled(true);
    
@@ -189,7 +189,7 @@ b.setEnabled(false)
             alert("This player with ID: "+player+" just joined");
           })
             socket.on('newplayer', function(posx){
-    balls[posx.id].position.y += posx.pos;
+    balls[posx.id].position.copyFrom(posx.pos);
   });
           
           socket.on("player", function(spawn){
