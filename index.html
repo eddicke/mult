@@ -182,8 +182,8 @@ b.setEnabled(false)
       socket.emit("newplayer", {id: id, pos: pos})
           scene.onPointerDown = function(ev, pickInfo){
     if(pickInfo.hit){
-      pos.copyFrom(pickInfo.pickedPoint)
-      socket.emit("newplayer", {id: id, pos: pos})
+     // pos.copyFrom(pickInfo.pickedPoint)
+      socket.emit("newplayer", {id: id, pos: pickInfo.pickedPoint})
     }
            }
        //broadcast new user spawned
