@@ -230,11 +230,8 @@ b.setEnabled(false)
             alert("This player with ID: "+player+" just joined");
           })
             socket.on('newplayer', function(posx){
-            balls[posx.id].position.copyFrom(posx.pos);
-     if(id == posx.id){
-       balls[id].setParent(camera)
-       balls[id].position.z = 5
-     }
+           // balls[posx.id].position.copyFrom(posx.pos);
+     
              
   });
           
@@ -282,8 +279,11 @@ b.setEnabled(false)
           var pos = []
 socket.on('control', function(player){
   balls[player.id].setEnabled(true);
-  //balls[player.id].position.copyFrom(player.pos)
-
+  balls[player.id].position.copyFrom(player.pos)
+if(id != player.id){
+       balls[id].setParent(camera)
+       balls[id].position.z = 5
+     }
   //console.log(player.id+" is already online set at position")
  // pos.push(player.pos)
   
