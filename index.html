@@ -152,6 +152,9 @@ b.setEnabled(false)
       
       
       if(usrs == 2){
+         usr.push(usrs)
+         id = usr[usr.length-1];
+        
          socket.emit("update", usrs)
        // console.log("there was an old user online")
         socket.emit("control", {id: id, pos: balls[id].getAbsolutePosition()})
