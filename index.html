@@ -226,7 +226,7 @@ b.setEnabled(false)
             alert("This player with ID: "+player+" just joined");
           })
             socket.on('newplayer', function(posx){
- // balls[posx.id].position.copyFrom(posx.pos);
+             balls[posx.id].position.copyFrom(posx.pos);
      
              
   });
@@ -234,7 +234,7 @@ b.setEnabled(false)
           socket.on("player", function(spawn){
      
        socket.on('control', function(player){
-  balls[player].position.set(spawn.pos);
+ //  balls[player].position.set(spawn.pos);
   
 })
    
