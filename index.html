@@ -38,11 +38,11 @@
         <script>
 
 var socket;
-      var usr = []
+     
       var score = 0
 var username = window.prompt('Enter a username:', '');
           var name = username;
-           var id = Number(username);
+          
           
 document.getElementById('chatContent').innerHTML = "welcome to the chat forum"
 
@@ -114,15 +114,26 @@ b.setEnabled(false)
           
   var msgs = []
   var pm = []
-  var usrs = 0;
   var amt = 0;
   var players = []
+  var id = 0
+   var usr = []
+     var usrs = 0;
+         
+        
+          
   socket.on('connect', function() {
     var emp;
  socket.emit("bot", id)
  socket.emit("hunts", document.getElementById('chatContent').innerHTML)
+    
     socket.on("hunts", function(me){
     usrs++
+      
+       usr.push(usrs)
+       id = usr[usr.length-1];
+      
+      
       console.log("there's a new user online");
       socket.emit("update", usrs)
     socket.emit("control", {id: id, pos: balls[id].getAbsolutePosition()})
