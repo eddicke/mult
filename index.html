@@ -220,6 +220,7 @@ b.setEnabled(false)
           
           
           if(id == id){
+            balls[id].setParent(camera)
            document.addEventListener("keydown", function(ev){
     if(ev.which == 32){
         amt +=.05
@@ -250,11 +251,17 @@ b.setEnabled(false)
           //terrain heightmap collision
           var ballElevation = 30
     var ballAltitude = 0.0
+     var camElevation = 14.0;
+    var camAltitude = 0.0;
     scene.registerBeforeRender(function() {
         if (terrainCreated) {
+          
+           camAltitude = terrain.getHeightFromMap(camera.position.x, camera.position.z) + camElevation;
+           camera.position.y = camAltitude;
+          
        balls.forEach(function(m){
-            ballAltitude = terrain.getHeightFromMap(ball.position.x, ball.position.z) + ballElevation;
-            m.position.y =  ballAltitude;
+           // ballAltitude = terrain.getHeightFromMap(ball.position.x, ball.position.z) + ballElevation;
+          //  m.position.y =  ballAltitude;
        })
         }
     });
