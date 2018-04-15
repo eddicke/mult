@@ -138,7 +138,7 @@ b.setEnabled(false)
       socket.emit("update", usrs)
     socket.emit("control", {id: id, pos: balls[id].getAbsolutePosition()})
       
-      socket.emit("newplayer", {id: id, pos: amt})
+      socket.emit("newplayer", {id: id, pos: new BABYLON.Vector3(Math.random()*2, Math.random()*2, Math.random()*2)})
           scene.onPointerDown = function(ev, pickInfo){
     if(pickInfo.hit){
       socket.emit("newplayer", {id: id, pos: pickInfo.pickedPoint})
@@ -189,7 +189,8 @@ b.setEnabled(false)
             alert("This player with ID: "+player+" just joined");
           })
             socket.on('newplayer', function(posx){
-    balls[posx.id].position.copyFrom(posx.pos);
+   // balls[posx.id].position.copyFrom(posx.pos);
+              balls[posx.id].position = BABYLON.Vector3.Lerp(balls[posx.id].position, posx.pos, .05);
   });
           
           socket.on("player", function(spawn){
