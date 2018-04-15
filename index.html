@@ -42,7 +42,7 @@ var socket;
       var score = 0
 var username = window.prompt('Enter a username:', '');
           var name = username;
-          
+            var id = Number(username)
           
 document.getElementById('chatContent').innerHTML = "welcome to the chat forum"
 
@@ -116,7 +116,7 @@ b.setEnabled(false)
   var pm = []
   var amt = 0;
   var players = []
-  var id = 0
+
    var usr = []
      var usrs = 0;
          
@@ -131,7 +131,7 @@ b.setEnabled(false)
     usrs++
       
       
-       id = usrs;
+      
       
       
       console.log("there's a new user online");
@@ -152,7 +152,7 @@ b.setEnabled(false)
       
       
       if(usrs == 2){
-         id = usrs;
+   
         
          socket.emit("update", usrs)
        // console.log("there was an old user online")
