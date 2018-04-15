@@ -145,17 +145,7 @@ b.setEnabled(false)
 
            var amt = 0;
           
- if(id == id){
-            balls[id].setParent(camera)
-            balls[id].position.y = -.5
-            balls[id].position.z = 4
-           document.addEventListener("keydown", function(ev){
-    if(ev.which == 32){
-        amt +=.05
-    }
-})
-          }
-          
+
 
           //********************************************************************************THE SERVER-CLIENT SIDE
   socket = io();
@@ -236,7 +226,7 @@ b.setEnabled(false)
             alert("This player with ID: "+player+" just joined");
           })
             socket.on('newplayer', function(posx){
- // balls[posx.id].position.copyFrom(posx.pos);
+  balls[posx.id].position.copyFrom(posx.pos);
      
              
   });
@@ -251,7 +241,14 @@ b.setEnabled(false)
      })
           
               ///////////////////////////************************************************
-          alert("sds")
+          if(id == id){
+           document.addEventListener("keydown", function(ev){
+    if(ev.which == 32){
+        amt +=.05
+    }
+})
+          }
+          
           //terrain heightmap collision
           var ballElevation = 30
     var ballAltitude = 0.0
@@ -264,8 +261,8 @@ b.setEnabled(false)
            camera.position.y = camAltitude;
           
        balls.forEach(function(m){
-           // ballAltitude = terrain.getHeightFromMap(ball.position.x, ball.position.z) + ballElevation;
-          //  m.position.y =  ballAltitude;
+            ballAltitude = terrain.getHeightFromMap(ball.position.x, ball.position.z) + ballElevation;
+           m.position.y =  ballAltitude;
        })
         }
     });
