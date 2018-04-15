@@ -46,6 +46,12 @@ var username = window.prompt('Enter a username:', '');
           
 document.getElementById('chatContent').innerHTML = "welcome to the chat forum"
 
+          //terrain
+          var url = "https://cdn.rawgit.com/BabylonJS/Extensions/master/DynamicTerrain/dist/babylon.dynamicTerrain.min.js";
+var s = document.createElement("script");
+s.src = url;
+document.head.appendChild(s);
+          
       
         var canvas = document.getElementById("renderCanvas");
         var engine = new BABYLON.Engine(canvas, true);
@@ -74,6 +80,41 @@ document.getElementById('chatContent').innerHTML = "welcome to the chat forum"
             // Our built-in 'ground' shape. Params: name, width, depth, subdivs, scene
             var ground = BABYLON.Mesh.CreateGround("ground1", 26, 26, 2, scene);
         
+            var terrainMaterial = new BABYLON.StandardMaterial("materialGround", scene);
+    terrainMaterial.diffuseColor = new BABYLON.Color3(0.15, 0.9, 0.25);
+    //terrainMaterial.wireframe = true;
+
+    var terrainCreated = false;
+    var terrain;
+
+    s.onload = function() {
+        var mapSubX = 100;
+        var mapSubZ = 100;
+        var terrainSub = 50;
+
+        // map creation
+        var mapData = new Float32Array(mapSubX * mapSubZ * 3);   
+        for (var l = 0; l < mapSubZ; l++) {           
+            for (var w = 0; w < mapSubX; w++) {                
+                mapData[3 *(l * mapSubX + w)] = (w - mapSubX * 0.5) * 2.0;
+                mapData[3 * (l * mapSubX + w) + 1] = w / (l +1) * Math.sin(l / 2) * Math.cos(w / 2) * 2.0;
+                mapData[3 * (l * mapSubX + w) + 2] = (l - mapSubZ * 0.5) * 2.0;
+           }            
+        }
+
+        // terrain creation
+        var params = {
+            mapData: mapData,
+            mapSubX: mapSubX,
+            mapSubZ: mapSubZ,
+            terrainSub: terrainSub
+        };
+        terrain = new BABYLON.DynamicTerrain("terrain", params, scene);
+        terrain.mesh.material = terrainMaterial;
+        terrainCreated = true;
+    };
+
+          
            var Player = function(){
        this.player = BABYLON.Mesh.CreateSphere("sphere1", 16, 2, scene);
        return this.player
@@ -207,6 +248,21 @@ b.setEnabled(false)
      })
           
               ///////////////////////////************************************************
+          
+          //terrain heightmap collision
+          var ballElevation = 1.0
+    var ballAltitude = 0.0
+    scene.registerBeforeRender(function() {
+        if (terrainCreated) {
+       if(id == id){
+            ballAltitude = terrain.getHeightFromMap(ball.position.x, ball.position.z) + ballElevation;
+           balls[id].position.y =  ballAltitude;
+       }
+        }
+    });
+          
+          
+          //spawn player and player position
           var pos = []
 socket.on('control', function(player){
   balls[player.id].setEnabled(true);
