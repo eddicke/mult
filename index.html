@@ -182,12 +182,12 @@ b.setEnabled(false)
       
       socket.emit("newplayer", {id: id, pos: pos})
           scene.onPointerDown = function(ev, pickInfo){
-            
-            camera.lockedTarget = ball
+            if(id == id){
+            camera.lockedTarget = balls[id]
 setTimeout(function(){
     camera.lockedTarget = null
 }, 200)
-            
+            }
     if(pickInfo.hit){
      // pos.copyFrom(pickInfo.pickedPoint)
       socket.emit("newplayer", {id: id, pos: pickInfo.pickedPoint})
@@ -265,10 +265,10 @@ setTimeout(function(){
     scene.registerBeforeRender(function() {
       if(id == id){
         
-         camera.position.y = balls[id].position.y+10
+         /*camera.position.y = balls[id].position.y+10
             camera.position.x = balls[id].position.x
             //camera.position.z = balls[id].position.z-80
-        
+        */
       }
         if (terrainCreated) {
           
