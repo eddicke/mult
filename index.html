@@ -191,7 +191,13 @@ b.setEnabled(false)
       
     }
            }
-          document.addEventListener("keydown", function(){
+           document.addEventListener("keydown", function(ev){
+             if(ev.which == 32){
+              balls[id].position.x += .05 
+             }
+             
+           })
+         scene.registerBeforeRender(function(){
             socket.emit("newplayer", {id: id, pos: balls[id].getAbsolutePosition()})
           })
           
