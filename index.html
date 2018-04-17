@@ -111,6 +111,7 @@ document.head.appendChild(s);
         };
         terrain = new BABYLON.DynamicTerrain("terrain", params, scene);
         terrain.mesh.material = terrainMaterial;
+      terrain.mesh.visibility = 0
         terrainCreated = true;
     };
 
@@ -187,16 +188,11 @@ b.setEnabled(false)
           scene.onPointerDown = function(ev, pickInfo){
            
     if(pickInfo.hit){
-  //   pos.copyFrom(pickInfo.pickedPoint)
+  balls[id].position.copyFrom(pickInfo.pickedPoint)
       
     }
            }
-           document.addEventListener("keydown", function(ev){
-             if(ev.which == 32){
-              balls[id].position.y += .05 
-             }
-             
-           })
+      
          scene.registerBeforeRender(function(){
             socket.emit("newplayer", {id: id, pos: balls[id].getAbsolutePosition()})
           })
